@@ -4,7 +4,7 @@
 > This is an original, from-scratch build. It is not affiliated with, and does not
 > contain any code, prompts, data, or business logic from, any employer or client.
 
-![status](https://img.shields.io/badge/status-planned-lightgrey)
+![status](https://img.shields.io/badge/status-phase%201%20in%20progress-yellow)
 ![python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -50,6 +50,22 @@ Work is broken into phase-tagged user stories tracked as GitHub Issues, not in t
     gh issue list --repo faheemkhaskheli9/speech-model-evaluator --state open --label type:user-story
 
 Implement Phase 1 issues first (later phases depend on it). When you start one, add label `status:in-progress`. When you finish, close it referencing the commit (e.g. `git commit -m "... Closes #4"`) and push.
+
+## Phase 1 quickstart
+
+```bash
+pip install -r requirements.txt
+
+# Pair each <stem>.wav/.mp3 with <stem>.txt into a manifest
+PYTHONPATH=src python -m sme.cli --audio-dir examples/audio --out data/dataset
+# or: python scripts/assemble_dataset.py --audio-dir examples/audio --out data/dataset
+```
+
+`manifest.json` records `audio_path`, `transcript`, `language`, and
+`duration_seconds` per clip. WAV duration is read with the stdlib; MP3 needs
+`mutagen`. A missing/empty transcript is a hard error, not a silent skip.
+
+VS Code: **SME: assemble dataset**, **SME: pytest** in `.vscode/launch.json`.
 
 ## 6. Repository Structure
 

@@ -1,1 +1,6 @@
-# Fill in with the exact package versions used once implementation starts.
+# Phase 1 runtime + test dependencies.
+# mutagen: MP3 duration probing (WAV uses the stdlib `wave` module).
+mutagen>=1.47
+
+# Testing
+pytest>=7.4
