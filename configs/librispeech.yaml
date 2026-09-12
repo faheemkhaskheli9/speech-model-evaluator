@@ -1,0 +1,12 @@
+# LibriSpeech benchmark subset settings (issue #2).
+#
+# The full dev-clean split is ~337 MB; max_utterances caps how many
+# transcribed utterances get converted into the local manifest once it's
+# downloaded and extracted, so a run/test doesn't have to process the whole
+# split. cache_dir holds the downloaded tarball and the extracted tree so a
+# re-run doesn't re-download or re-extract.
+
+url: https://www.openslr.org/resources/12/dev-clean.tar.gz
+language: en
+max_utterances: 50
+cache_dir: data/librispeech

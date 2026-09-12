@@ -25,7 +25,7 @@ import wave
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
-AUDIO_EXTS = {".wav", ".mp3"}
+AUDIO_EXTS = {".wav", ".mp3", ".flac"}
 
 
 class DatasetError(Exception):
@@ -75,6 +75,19 @@ def probe_duration(path: Path) -> float:
             audio = MP3(str(path))
         except Exception as exc:  # mutagen raises a variety of types
             raise AudioError(f"cannot read MP3 {path}: {exc}") from exc
+        return round(float(audio.info.length), 3)
+    if ext == ".flac":
+        try:
+            from mutagen.flac import FLAC
+        except ImportError as exc:  # pragma: no cover - depends on optional dep
+            raise AudioError(
+                "FLAC duration requires the 'mutagen' package; install it or "
+                "convert the clip to WAV"
+            ) from exc
+        try:
+            audio = FLAC(str(path))
+        except Exception as exc:  # mutagen raises a variety of types
+            raise AudioError(f"cannot read FLAC {path}: {exc}") from exc
         return round(float(audio.info.length), 3)
     raise AudioError(f"unsupported audio extension {ext!r} for {path}")
 

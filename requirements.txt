@@ -1,6 +1,7 @@
 # Phase 1 runtime + test dependencies.
-# mutagen: MP3 duration probing (WAV uses the stdlib `wave` module).
+# mutagen: MP3/FLAC duration probing (WAV uses the stdlib `wave` module).
 mutagen>=1.47
+PyYAML>=6.0
 
 # Testing
 pytest>=7.4
